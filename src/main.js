@@ -1,40 +1,9 @@
-const movieSectionEl = document.getElementById('movie-section');
+import { renderOnScreen } from './renderFunctions';
+
 const sortBtn = document.getElementById('sort-button');
 const searchBoxEl = document.getElementById('search-box');
 const filterBtn = document.getElementById('filter-button');
 const genreSelectEl = document.getElementById('filter-type');
-
-const changeFavStatus = () => {
-  const heartElList = document.querySelectorAll('.heart');
-  heartElList.forEach((heart) => {
-    heart.addEventListener('click', (e) => {
-      e.target.classList.toggle('heart-red')
-    })
-  })
-}
- 
-const renderOnScreen = (movieList) => {
-  movieSectionEl.textContent = '';
-  movieList.forEach((movie) => {
-    const box = document.createElement('div');
-    box.classList.add('box');
-    box.setAttribute('id', movie.id);
-    const heart = document.createElement('span');
-    heart.classList.add('heart')
-    heart.classList.add('heart-blue')
-    const boxImage = document.createElement('img');
-    boxImage.src = `${movie.image.medium}`;
-    box.appendChild(boxImage);
-    box.appendChild(heart);
-    movieSectionEl.appendChild(box);
-  });
-  changeFavStatus();
-};
-
-const renderMovies = async (movies) => {
-  const movieList = await movies();
-  renderOnScreen(movieList);
-};
 
 const filterMovieList = (movieList, genre) => {
   if (genre !== 'all') {
@@ -65,20 +34,24 @@ const getSearchedMovies = async () => {
     const shows = movies.map((movie) => movie.show);
     const filteredShows = filterMovieList(shows, genreSelectEl.value);
     localStorage.setItem('movies', JSON.stringify(filteredShows));
-    renderOnScreen(filteredShows);
-  } else {
-    const movies = await getAllMovies();
-    const filteredShows = filterMovieList(movies, genreSelectEl.value);
-    localStorage.setItem('movies', JSON.stringify(filteredShows));
-    renderOnScreen(filteredShows);
-  }
+    return filteredShows;
+  } 
+  const movies = await getAllMovies();
+  const filteredShows = filterMovieList(movies, genreSelectEl.value);
+  localStorage.setItem('movies', JSON.stringify(filteredShows));
+  return filteredShows;
+};
+
+const renderMovies = async (movies) => {
+  const movieList = await movies();
+  renderOnScreen(movieList);
 };
 
 renderMovies(getAllMovies);
 
 sortBtn.addEventListener('click', sortAlpha);
 filterBtn.addEventListener('click', () => {
-  getSearchedMovies();
+  renderMovies(getSearchedMovies)
   searchBoxEl.value = '';
 });
 
