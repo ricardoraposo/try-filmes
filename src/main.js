@@ -1,4 +1,4 @@
-import { renderOnScreen } from './renderFunctions';
+import renderOnScreen from './renderFunctions';
 
 const sortBtn = document.getElementById('sort-button');
 const searchBoxEl = document.getElementById('search-box');

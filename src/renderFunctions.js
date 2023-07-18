@@ -44,7 +44,7 @@ const checkFav = () => {
   });
 }
 
-export const renderOnScreen = (movieList) => {
+const renderOnScreen = (movieList) => {
   movieSectionEl.textContent = '';
   movieList.forEach((movie) => {
     createBoxElement(movie);
@@ -52,3 +52,5 @@ export const renderOnScreen = (movieList) => {
   });
   addFavEventListener();
 };
+
+export default renderOnScreen;
