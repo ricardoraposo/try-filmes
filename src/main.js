@@ -57,6 +57,13 @@ const renderOnScreen = (movieList) => {
   addFavEventListener();
 };
 
+const renderNoResult = () => {
+  movieSectionEl.textContent = '';
+  const errEl = document.createElement('h3');
+  errEl.textContent = 'Nenhuma série encontrada 😔';
+  movieSectionEl.appendChild(errEl);
+}
+
 const filterMovieList = (movieList, genre) => {
   const favoriteList = JSON.parse(localStorage.getItem('favorites'));
   switch (genre) {
@@ -101,7 +108,11 @@ const getSearchedMovies = async () => {
 
 const renderMovies = async (movies) => {
   const movieList = await movies();
-  renderOnScreen(movieList);
+  if (movieList.length > 0) {
+    renderOnScreen(movieList);
+  } else {
+    renderNoResult();
+  }
 };
 
 renderMovies(getAllMovies);
