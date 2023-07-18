@@ -1,19 +1,72 @@
-import renderOnScreen from './renderFunctions';
-
 const sortBtn = document.getElementById('sort-button');
 const searchBoxEl = document.getElementById('search-box');
 const filterBtn = document.getElementById('filter-button');
 const genreSelectEl = document.getElementById('filter-type');
 
+let favoriteMovies = localStorage.getItem('favorites')
+  ? JSON.parse(localStorage.getItem('favorites'))
+  : [];
+const movieSectionEl = document.getElementById('movie-section');
+
+const createBoxElement = (movie) => {
+  const box = document.createElement('div');
+  const heart = document.createElement('span');
+  const boxImage = document.createElement('img');
+  heart.classList.add('heart');
+  heart.classList.add('heart-blue');
+  boxImage.src = `${movie.image.medium}`;
+  box.classList.add('box');
+  box.setAttribute('id', movie.id);
+  box.appendChild(boxImage);
+  box.appendChild(heart);
+  movieSectionEl.appendChild(box);
+};
+
+const addFavEventListener = () => {
+  const heartElList = document.querySelectorAll('.heart');
+  heartElList.forEach((heart) => {
+    heart.addEventListener('click', (e) => {
+      e.target.classList.toggle('heart-red');
+      e.target.classList.toggle('heart-blue');
+      if (e.target.classList.contains('heart-red')) {
+        favoriteMovies.push(heart.parentNode.id);
+        localStorage.setItem('favorites', JSON.stringify(favoriteMovies));
+      } else {
+        favoriteMovies = favoriteMovies.filter((movie) => movie !== heart.parentNode.id);
+        localStorage.setItem('favorites', JSON.stringify(favoriteMovies));
+      }
+    });
+  });
+};
+
+const checkFav = () => {
+  const favoriteList = JSON.parse(localStorage.getItem('favorites'));
+  const boxElements = document.querySelectorAll('.box');
+  boxElements.forEach((box) => {
+    if (favoriteList.includes(box.id)) {
+      box.lastChild.classList.add('heart-red');
+    }
+  });
+};
+
+const renderOnScreen = (movieList) => {
+  movieSectionEl.textContent = '';
+  movieList.forEach((movie) => {
+    createBoxElement(movie);
+    checkFav();
+  });
+  addFavEventListener();
+};
+
 const filterMovieList = (movieList, genre) => {
   const favoriteList = JSON.parse(localStorage.getItem('favorites'));
   switch (genre) {
-    case 'All':
-      return movieList;
-    case 'Favorites':
-      return movieList.filter((movie) => favoriteList.includes(movie.id.toString()));
-    default:
-      return movieList.filter((movie) => movie.genres.includes(genre));
+  case 'All':
+    return movieList;
+  case 'Favorites':
+    return movieList.filter((movie) => favoriteList.includes(movie.id.toString()));
+  default:
+    return movieList.filter((movie) => movie.genres.includes(genre));
   }
 };
 
@@ -40,7 +93,7 @@ const getSearchedMovies = async () => {
     const filteredShows = filterMovieList(shows, genreSelectEl.value);
     localStorage.setItem('movies', JSON.stringify(filteredShows));
     return filteredShows;
-  } 
+  }
   const movies = await getAllMovies();
   const filteredShows = filterMovieList(movies, genreSelectEl.value);
   localStorage.setItem('movies', JSON.stringify(filteredShows));
@@ -56,7 +109,7 @@ renderMovies(getAllMovies);
 
 sortBtn.addEventListener('click', sortAlpha);
 filterBtn.addEventListener('click', () => {
-  renderMovies(getSearchedMovies)
+  renderMovies(getSearchedMovies);
   searchBoxEl.value = '';
 });
 
