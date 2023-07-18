@@ -2,7 +2,6 @@ const sortBtn = document.getElementById('sort-button');
 const searchBoxEl = document.getElementById('search-box');
 const filterBtn = document.getElementById('filter-button');
 const genreSelectEl = document.getElementById('filter-type');
-
 let favoriteMovies = localStorage.getItem('favorites')
   ? JSON.parse(localStorage.getItem('favorites'))
   : [];
