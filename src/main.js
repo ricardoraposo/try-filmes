@@ -6,10 +6,15 @@ const filterBtn = document.getElementById('filter-button');
 const genreSelectEl = document.getElementById('filter-type');
 
 const filterMovieList = (movieList, genre) => {
-  if (genre !== 'all') {
-    return movieList.filter((movie) => movie.genres.includes(genre));
+  const favoriteList = JSON.parse(localStorage.getItem('favorites'));
+  switch (genre) {
+    case 'All':
+      return movieList;
+    case 'Favorites':
+      return movieList.filter((movie) => favoriteList.includes(movie.id.toString()));
+    default:
+      return movieList.filter((movie) => movie.genres.includes(genre));
   }
-  return movieList;
 };
 
 const sortAlpha = () => {
