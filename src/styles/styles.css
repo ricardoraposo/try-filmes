@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Comic Neue', cursive;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+header {
+  text-align: center;
+  padding: 3rem 0;
+  background-color: lightcyan;
+}
+
+.filter-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0rem;
+  flex-wrap: wrap;
+}
+.heart {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+  background-image: url('../../imgs/heart-blue.svg');
+ }
+
+.heart-blue {
+  background-image: url('../../imgs/heart-blue.svg');
+}
+
+.heart-red {
+  background-image: url('../../imgs/heart-red.svg');
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#movie-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link href="src/styles/styles.css" rel="stylesheet">
+    <title></title>
+  </head>
+  <body>
+    <header>
+      <h1 id="main-title">Try Series</h1>
+    </header>
+    <div class="filter-section">
+      <div class="filter-select">
+        <label for="filter-type">Selecione o gênero</label>
+        <select id="filter-type" name="filter">
+          <option value="all">Todos</option>
+          <option value="Action">Acão</option>
+          <option value="Adventure">Aventura</option>
+          <option value="Comedy">Comédia</option>
+          <option value="Crime">Crime</option>
+          <option value="Drama">Drama</option>
+          <option value="Fantasy">Fantasia</option>
+          <option value="Anime">Anime</option>
+          <option value="Horror">Terror</option>
+          <option value="Mystery">Mistério</option>
+          <option value="Romance">Romance</option>
+          <option value="Science-Fiction">Ficcão Científica</option>
+          <option value="Sports">Esportes</option>
+          <option value="Thriller">Suspense</option>
+          <option value="Western">Velho Oeste</option>
+        </select>
+      </div>
+      <div class="search-input">
+        <label for="search-box">Busca</label>
+        <input type="text" id="search-box">
+        <button id="filter-button">Filtrar</button>
+      </div>
+      <button id="sort-button">Ordenar alfabeticamente</button>
+    </div>
+    <main id="movie-section">
+    </main>
+    <script src="src/main.js" type="module"></script>
+  </body>
+</html>

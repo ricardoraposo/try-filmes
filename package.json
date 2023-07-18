@@ -1,0 +1,19 @@
+{
+  "name": "vida-real-fd-teste-tecnico-hofs",
+  "version": "0.0.1",
+  "description": "Um projeto baseado em um possível teste técnico",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "vite --open",
+    "build": "vite build",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@trybe/eslint-config-frontend": "^1.11.3",
+    "vite": "^4.4.4"
+  }
+}
