@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "keywords": [],
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@trybe/eslint-config-frontend": "^1.11.3"
+    "@trybe/eslint-config-frontend": "^1.11.3",
+    "vite": "^4.4.4"
   }
 }
