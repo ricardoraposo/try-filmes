@@ -2,6 +2,7 @@ const sortBtn = document.getElementById('sort-button');
 const searchBoxEl = document.getElementById('search-box');
 const filterBtn = document.getElementById('filter-button');
 const genreSelectEl = document.getElementById('filter-type');
+
 let favoriteMovies = localStorage.getItem('favorites')
   ? JSON.parse(localStorage.getItem('favorites'))
   : [];
@@ -39,10 +40,9 @@ const addFavEventListener = () => {
 };
 
 const checkFav = () => {
-  const favoriteList = JSON.parse(localStorage.getItem('favorites'));
   const boxElements = document.querySelectorAll('.box');
   boxElements.forEach((box) => {
-    if (favoriteList.includes(box.id)) {
+    if (favoriteMovies.includes(box.id)) {
       box.lastChild.classList.add('heart-red');
     }
   });
